@@ -99,7 +99,9 @@ class A11yHelper extends Helper {
 
 	async _failed(test: Mocha.Test) {
 		await this.helpers.Playwright.browserContext.close();
-		(test.artifacts as any).a11yReports = resolve(outputDir, fileName);
+		if (fileName && outputDir) {
+			(test.artifacts as any).a11yReports = resolve(outputDir, fileName);
+		}
 		if (allure) {
 			await this._attachArtifacts(test);
 		}
@@ -107,7 +109,9 @@ class A11yHelper extends Helper {
 
 	async _passed(test: Mocha.Test) {
 		await this.helpers.Playwright.browserContext.close();
-		(test.artifacts as any).a11yReports = resolve(outputDir, fileName);
+		if (fileName && outputDir) {
+			(test.artifacts as any).a11yReports = resolve(outputDir, fileName);
+		}
 		if (allure) {
 			await this._attachArtifacts(test);
 		}
